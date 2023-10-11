@@ -53,7 +53,7 @@
 int main()
 {
 
-    int Element[99] = {0}, N, valuesE[99] = {0};
+    int Element[99] = {0}, N, valuesE[99] = {1};
 
     printf("input N : ");
     scanf("%d", &N);
@@ -64,20 +64,35 @@ int main()
         scanf("%d", &Element[i]);
     }
 
-    for ( int i = 0, R = N; i < N ; i++ )
-    {
-        for ( int i2 = 0 ; i2 < N ; i2++ )
+
+    for ( int i = 0 ; i < N ; i++ )
+    {  
+        for ( int j = i + 1 ; j < N ; j++ )
         {
-            if ( Element[i] == Element[R - i] )
+            if ( Element[ i ] > Element[ j ] )
             {
-                valuesE[i] += 1 ;
+                int PlaceHold = Element[ i ] ;
+                Element [ i ] = Element [ j ] ;
+                Element [ j ] = PlaceHold ;
             }
         }
     }
 
-    for (int i = 0; i < N; i++)
+
+    for ( int i = 0 ; i < N ; i++ )
+    {  
+        for ( int j = i + 1 ; j < N ; j++ )
+        {
+            if ( Element[ j ] == Element[ i ] )
+            {
+                valuesE[ j ] += 1 ;
+            }
+        }
+    }
+
+    for ( int i = 0; i < N; i++ )
     {
-        printf("%d -> %d value.\n", valuesE[i] , valuesE[i]);
+        printf("%d -> %d value.\n", Element[ i ] , valuesE[i]);
     }
 
     return 0;
